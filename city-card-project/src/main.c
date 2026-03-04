@@ -13,10 +13,10 @@ int main() {
 
  // Prompt the user for input and read the values
 
-    printf ("Enter one character between a-h:\n");
+    printf ("Enter one character between a-h:");
     scanf(" %c", &c);
 
-    printf ("Enter the second character: between a-h:\n");
+    printf ("Enter the second character: between a-h:");
     scanf(" %c", &e);
 
     printf ("Enter the first card number between A1, B2, C3... H8: ");
@@ -57,27 +57,24 @@ int main() {
     printf ("-----------------------------\n"); //print a separator line for better readability of the output
 
  // Calculate population density and GDP per capita for both cities
- float populationDensity1, populationDensity2;
- populationDensity1 = (float)population1 / (float)areaKm2_1;
- populationDensity2 = (float)population2 / (float)areaKm2_2;
-  float gdpPerCapita1, gdpPerCapita2;
- gdpPerCapita1 = (float) gdp1 / (float)population1;
- gdpPerCapita2 = (float) gdp2 / (float)population2;
+ double populationDensity1 = (double)population1 / areaKm2_1;
+ double populationDensity2 = (double)population2 / areaKm2_2;
+ double gdpPerCapita1 = gdp1 / (double)population1;
+ double gdpPerCapita2 = gdp2 / (double) population2;
 
  //superpower comparison
- float superpowerComparison1;
- superpowerComparison1 = ((float)population1 + (float)areaKm2_1 + (float)gdp1 + (float)numberOfTouristPoints1 + gdpPerCapita1) / populationDensity1;
- float superpowerComparison2;
- superpowerComparison2 = ((float)population2 + (float)areaKm2_2 + (float)gdp2 + (float)numberOfTouristPoints2 + gdpPerCapita2) / populationDensity2;
+ double superpowerComparison1 = ((double) population1 + areaKm2_1 + gdp1 + numberOfTouristPoints1 + gdpPerCapita1)
+                                          / populationDensity1;
+ double superpowerComparison2 = ((double) population2 + areaKm2_2 + gdp2 +
+                                numberOfTouristPoints2 + gdpPerCapita2) / populationDensity2;
 
- short int result1, result2, result3, result4, result5, result6, result7;
- result1 = population1 > population2;
- result2 = areaKm2_1 > areaKm2_2;
- result3 = gdp1 > gdp2;
- result4 = numberOfTouristPoints1 > numberOfTouristPoints2;
- result5 = gdpPerCapita1 > gdpPerCapita2;
- result6 = populationDensity1 < populationDensity2;
- result7 = superpowerComparison1 > superpowerComparison2;
+ short int result1 = population1 > population2;
+ short int result2 = areaKm2_1 > areaKm2_2;
+ short int result3 = gdp1 > gdp2;
+ short int result4 = numberOfTouristPoints1 > numberOfTouristPoints2;
+ short int result5 = gdpPerCapita1 > gdpPerCapita2;
+ short int result6 = populationDensity1 < populationDensity2;
+ short int result7 = superpowerComparison1 > superpowerComparison2;
 
 
   //print the collected information of the first city
