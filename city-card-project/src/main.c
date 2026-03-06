@@ -1,8 +1,13 @@
 #include <stdio.h>
 
+void flush_in(){
+    int ch;
+    while( (ch = fgetc(stdin)) != EOF && ch != '\n' ){}
+}
+
 int main()
 {
-    char c, e;
+    char input1, input2;
     char d[20], f[20];
     char city1[20], city2[20];
     unsigned long int population1, population2;
@@ -14,85 +19,116 @@ int main()
      * Collects user data and performs basic validation.
      */
     printf("Enter one character between a-h:");
-    scanf(" %c", &c);
+    scanf(" %c", &input1);
+    flush_in();
 
-    if (!((c >= 'a' && c <= 'h') || (c >= 'A' && c <= 'H')))
+    while (!((input1 >= 'a' && input1 <= 'h') || (input1 >= 'A' && input1 <= 'H') || (input1 == '\0')))
     {
         printf("Invalid character. Please enter a character between a-h.\n");
-        return 1;
+        printf("Enter one character between a-h:");
+        scanf(" %c", &input1);
+        flush_in();
     }
 
     printf("Enter the first card number between A1, B2, C3... H8: ");
     scanf("%18s", d);
-    if (d[0] < 'A' || d[0] > 'H' || d[1] < '1' || d[1] > '8' || d[2] != '\0')
+    while (d [0] < 'A' || d [0] > 'H' || d [1] < '1' || d [1] > '8' || d [2] != '\0')
     {
         printf("Invalid card number. Please enter a valid card number between A1 and H8.\n");
-        return 1;
+        printf("Enter the first card number between A1, B2, C3... H8: ");
+        scanf("%18s", d);
+        flush_in();
     }
 
     printf("Enter the name of the first city: ");
     scanf("%18s", city1);
+    flush_in();
 
     printf("Enter the population of the first city: ");
     scanf("%lu", &population1);
-    if (population1 == 0)
+    while (population1 == 0)
     {
         printf("Population cannot be zero.\n");
-        return 1;
+        scanf("%lu", &population1);
+        flush_in();
     }
 
     printf("Enter the area of the first city in km2: ");
     scanf("%lf", &areaKm2_1);
-    if (areaKm2_1 <= 0)
+    flush_in();
+
+    while (areaKm2_1 <= 0)
     {
         printf("Area must be greater than zero.\n");
-        return 1;
+        scanf("%lf", &areaKm2_1);
+        flush_in();
     }
+
     printf("Enter the GDP of the first city in full: ");
     scanf("%lf", &gdp1);
+    flush_in();
 
     printf("Enter the number of tourist attractions in the first city: ");
     scanf("%d", &numberOfTouristPoints1);
+    flush_in();
 
     printf("Enter the second character: between a-h:");
-    scanf(" %c", &e);
+    scanf(" %c", &input2);
+    flush_in();
 
-    if (!((e >= 'a' && e <= 'h') || (e >= 'A' && e <= 'H')))
+    while (!((input2 >= 'a' && input2 <= 'h') || (input2 >= 'A' && input2 <= 'H')))
     {
         printf("Invalid character. Please enter a character between a-h.\n");
-        return 1;
+        printf("Enter the second character: between a-h:");
+        scanf(" %c", &input2);
+        flush_in();
     }
+
     printf("Enter the second card number between A1, B2, C3... H8: ");
     scanf("%18s", f);
-    if (f[0] < 'A' || f[0] > 'H' || f[1] < '1' || f[1] > '8' || f[2] != '\0')
+    flush_in();
+
+    while (f [0] < 'A' || f [0] > 'H' || f [1] < '1' || f [1] > '8' || f [2]  != '\0')
     {
         printf("Invalid card number. Please enter a valid card number between A1 and H8.\n");
-        return 1;
+        printf("Enter the second card number between A1, B2, C3... H8: ");
+        scanf("%18s", f);
+        flush_in();
     }
 
     printf("Enter the second city name: ");
     scanf("%18s", city2);
+    flush_in();
 
     printf("Enter the population of the second city: ");
     scanf("%lu", &population2);
-    if (population2 == 0)
+    flush_in();
+
+    while (population2 == 0)
     {
         printf("Population cannot be zero.\n");
-        return 1;
+        scanf("%lu", &population2);
+        flush_in();
     }
+
     printf("Enter the area of the second city in km2: ");
     scanf("%lf", &areaKm2_2);
-    if (areaKm2_2 <= 0)
+    flush_in();
+
+    while (areaKm2_2 <= 0)
     {
         printf("Area must be greater than zero.\n");
-        return 1;
+        scanf("%lf", &areaKm2_2);
+        flush_in();
     }
 
     printf("Enter the GDP of the second city in full: ");
     scanf("%lf", &gdp2);
+    flush_in();
 
     printf("Enter the number of tourist attractions in the second city: ");
     scanf("%d", &numberOfTouristPoints2);
+    flush_in();
 
     printf("-----------------------------\n"); // print a separator line for better readability of the output
 
@@ -121,7 +157,7 @@ int main()
     int option, option1;
     // Output section: structured report for City 1
 
-    printf("Card letter: %c\n", c);
+    printf("Card letter: %c\n", input1);
     printf("Card number: %s\n", d);
     printf("City name: %s\n", city1);
     printf("Population: %lu\n", population1);
@@ -134,7 +170,7 @@ int main()
     printf("-----------------------------\n");
 
     // Output section: structured report for City 2
-    printf("Second card letter: %c\n", e);
+    printf("Second card letter: %c\n", input2);
     printf("Second card number: %s\n", f);
     printf("Name of second city: %s\n", city2);
     printf("Population: %lu\n", population2);
@@ -274,6 +310,10 @@ int main()
     default:
         printf("Invalid option. Please choose a number between 1 and 7.\n");
         break;
+    }
+    if (result1 == result2 && result2 == result3 && result3 == result4 && result4 == result5 && result5 == result6 && result6 == result7)
+    {
+        printf("Overall, it's a tie between the two cities based on the selected metrics.\n");
     }
     return 0;
 }
